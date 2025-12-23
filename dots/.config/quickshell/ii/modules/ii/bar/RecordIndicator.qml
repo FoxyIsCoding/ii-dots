@@ -5,7 +5,6 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 
-
 MouseArea {
     id: indicator
     property bool vertical: false
@@ -16,14 +15,14 @@ MouseArea {
     property color colText: Appearance.colors.colOnPrimary
 
     hoverEnabled: true
-    implicitWidth: vertical ? 20 : 80 // we have to enter a fixed size to make it dull 
+    implicitWidth: vertical ? 20 : 80
     implicitHeight: vertical ? 75 : 20
 
     Component.onCompleted: updateVisibility()
     onActivelyRecordingChanged: updateVisibility()
 
     function updateVisibility() {
-        rootItem.toggleVisible(activelyRecording)
+        rootItem.toggleVisible(activelyRecording);
     }
 
     function formatTime(totalSeconds) {
@@ -38,9 +37,9 @@ MouseArea {
         implicitHeight: indicator.vertical ? parent.implicitHeight : 20
         colBackgroundHover: "transparent"
         colRipple: "transparent"
-        
+
         onClicked: {
-            Quickshell.execDetached(Directories.recordScriptPath)
+            Quickshell.execDetached(Directories.recordScriptPath);
         }
         StyledPopup {
             hoverTarget: indicator
@@ -57,15 +56,15 @@ MouseArea {
             spacing: 4
 
             MaterialSymbol {
-                Layout.bottomMargin: 2
                 id: iconIndicator
+                Layout.bottomMargin: 2
                 z: 1
                 text: "screen_record"
                 color: indicator.colText
             }
-            
+
             StyledText {
-                id: textIndicator                
+                id: textIndicator
                 Layout.topMargin: 2
 
                 text: indicator.formatTime(Persistent.states.screenRecord.seconds)
@@ -83,29 +82,28 @@ MouseArea {
             spacing: 4
 
             MaterialSymbol {
-                Layout.alignment: Text.AlignHCenter
                 id: iconIndicator
+                Layout.alignment: Text.AlignHCenter
                 text: "screen_record"
                 color: indicator.colText
                 iconSize: Appearance.font.pixelSize.larger
                 horizontalAlignment: Text.AlignHCenter
             }
 
-            StyledText {              
+            StyledText {
                 Layout.alignment: Text.AlignHCenter
-                text: indicator.formatTime(Persistent.states.screenRecord.seconds).substring(0,2)
+                text: indicator.formatTime(Persistent.states.screenRecord.seconds).substring(0, 2)
                 color: indicator.colText
-            }
-            
-            StyledText {      
-                text: indicator.formatTime(Persistent.states.screenRecord.seconds).substring(3,5)
-                color: indicator.colText
-                Layout.alignment: Text.AlignHCenter
             }
 
+            StyledText {
+                text: indicator.formatTime(Persistent.states.screenRecord.seconds).substring(3, 5)
+                color: indicator.colText
+                Layout.alignment: Text.AlignHCenter
+            }
         }
     }
-    
+
     component PopupContent: ColumnLayout {
         anchors.centerIn: parent
         RowLayout {
@@ -125,7 +123,6 @@ MouseArea {
             StyledText {
                 text: Translation.tr("Click to stop the recording")
             }
-        }  
+        }
     }
-    
 }

@@ -16,7 +16,7 @@ MouseArea {
     property color colBackground: Appearance.colors.colPrimary
 
     property bool activelyScreenSharing: false
-    
+
     hoverEnabled: true
 
     Process {
@@ -24,15 +24,15 @@ MouseArea {
         running: true
         command: ["bash", "-c", Directories.screenshareStateScript]
     }
-    
+
     FileView {
         id: stateFile
         path: Directories.screenshareStatePath
         watchChanges: true
         onFileChanged: this.reload()
         onLoaded: {
-            indicator.activelyScreenSharing = !stateFile.text().trim().toLowerCase().includes("none")
-            rootItem.toggleVisible(indicator.activelyScreenSharing)
+            indicator.activelyScreenSharing = !stateFile.text().trim().toLowerCase().includes("none");
+            rootItem.toggleVisible(indicator.activelyScreenSharing);
         }
     }
 
@@ -63,7 +63,6 @@ MouseArea {
                     textFormat: Text.MarkdownText
                 }
             }
-            
         }
     }
 }
